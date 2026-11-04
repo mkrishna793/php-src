@@ -1,5 +1,5 @@
 /* This is a generated file, edit basic_functions.stub.php instead.
- * Stub hash: 5ccf5208c22244d77b47ac0f2363bf67eccb0e95
+ * Stub hash: d18ba006d85aa5ed10d612350a9806d7c04f5f8b
  * Has decl header: yes */
 
 #include "zend_attributes.h"
@@ -2234,6 +2234,20 @@ static const zend_frameless_function_info frameless_function_infos_in_array[] = 
 	{ 0 },
 };
 
+ZEND_FRAMELESS_FUNCTION(base64_encode, 1);
+static const zend_frameless_function_info frameless_function_infos_base64_encode[] = {
+	{ ZEND_FRAMELESS_FUNCTION_NAME(base64_encode, 1), 1 },
+	{ 0 },
+};
+
+ZEND_FRAMELESS_FUNCTION(base64_decode, 1);
+ZEND_FRAMELESS_FUNCTION(base64_decode, 2);
+static const zend_frameless_function_info frameless_function_infos_base64_decode[] = {
+	{ ZEND_FRAMELESS_FUNCTION_NAME(base64_decode, 1), 1 },
+	{ ZEND_FRAMELESS_FUNCTION_NAME(base64_decode, 2), 2 },
+	{ 0 },
+};
+
 ZEND_FRAMELESS_FUNCTION(trim, 1);
 ZEND_FRAMELESS_FUNCTION(trim, 2);
 static const zend_frameless_function_info frameless_function_infos_trim[] = {
@@ -3065,8 +3079,8 @@ static const zend_function_entry ext_functions[] = {
 	ZEND_RAW_FENTRY("array_chunk", zif_array_chunk, arginfo_array_chunk, ZEND_ACC_COMPILE_TIME_EVAL, NULL, NULL)
 	ZEND_RAW_FENTRY("array_combine", zif_array_combine, arginfo_array_combine, ZEND_ACC_COMPILE_TIME_EVAL, NULL, NULL)
 	ZEND_RAW_FENTRY("array_is_list", zif_array_is_list, arginfo_array_is_list, ZEND_ACC_COMPILE_TIME_EVAL, NULL, NULL)
-	ZEND_RAW_FENTRY("base64_encode", zif_base64_encode, arginfo_base64_encode, ZEND_ACC_COMPILE_TIME_EVAL, NULL, NULL)
-	ZEND_RAW_FENTRY("base64_decode", zif_base64_decode, arginfo_base64_decode, ZEND_ACC_COMPILE_TIME_EVAL, NULL, NULL)
+	ZEND_RAW_FENTRY("base64_encode", zif_base64_encode, arginfo_base64_encode, ZEND_ACC_COMPILE_TIME_EVAL, frameless_function_infos_base64_encode, NULL)
+	ZEND_RAW_FENTRY("base64_decode", zif_base64_decode, arginfo_base64_decode, ZEND_ACC_COMPILE_TIME_EVAL, frameless_function_infos_base64_decode, NULL)
 	ZEND_FE(constant, arginfo_constant)
 	ZEND_FE(ip2long, arginfo_ip2long)
 	ZEND_FE(long2ip, arginfo_long2ip)
