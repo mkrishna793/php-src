@@ -1926,12 +1926,15 @@ function array_is_list(array $array): bool {}
 /**
  * @compile-time-eval
  * @refcount 1
+ * @frameless-function {"arity": 1}
  */
 function base64_encode(string $string): string {}
 
 /**
  * @compile-time-eval
  * @refcount 1
+ * @frameless-function {"arity": 1}
+ * @frameless-function {"arity": 2}
  */
 function base64_decode(string $string, bool $strict = false): string|false {}
 

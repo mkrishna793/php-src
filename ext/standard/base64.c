@@ -1241,6 +1241,20 @@ PHP_FUNCTION(base64_encode)
 }
 /* }}} */
 
+/* Frameless fast-path for base64_encode(string $string): eliminates call frame setup & arg parsing */
+ZEND_FRAMELESS_FUNCTION(base64_encode, 1)
+{
+	zval str_tmp;
+	zend_string *str;
+
+	Z_FLF_PARAM_STR(1, str, str_tmp);
+
+	RETVAL_STR(php_base64_encode((unsigned char *) ZSTR_VAL(str), ZSTR_LEN(str)));
+
+flf_clean:
+	Z_FLF_PARAM_FREE_STR(1, str_tmp);
+}
+
 /* {{{ Decodes string using MIME base64 algorithm */
 PHP_FUNCTION(base64_decode)
 {
@@ -1263,3 +1277,43 @@ PHP_FUNCTION(base64_decode)
 	}
 }
 /* }}} */
+
+/* Frameless fast-path for base64_decode(string $string): eliminates call frame setup & arg parsing */
+ZEND_FRAMELESS_FUNCTION(base64_decode, 1)
+{
+	zval str_tmp;
+	zend_string *str, *result;
+
+	Z_FLF_PARAM_STR(1, str, str_tmp);
+
+	result = php_base64_decode_ex((unsigned char *) ZSTR_VAL(str), ZSTR_LEN(str), false);
+	if (result != NULL) {
+		RETVAL_STR(result);
+	} else {
+		RETVAL_FALSE;
+	}
+
+flf_clean:
+	Z_FLF_PARAM_FREE_STR(1, str_tmp);
+}
+
+/* Frameless fast-path for base64_decode(string $string, bool $strict): eliminates call frame setup & arg parsing */
+ZEND_FRAMELESS_FUNCTION(base64_decode, 2)
+{
+	zval str_tmp;
+	zend_string *str, *result;
+	bool strict;
+
+	Z_FLF_PARAM_STR(1, str, str_tmp);
+	Z_FLF_PARAM_BOOL(2, strict);
+
+	result = php_base64_decode_ex((unsigned char *) ZSTR_VAL(str), ZSTR_LEN(str), strict);
+	if (result != NULL) {
+		RETVAL_STR(result);
+	} else {
+		RETVAL_FALSE;
+	}
+
+flf_clean:
+	Z_FLF_PARAM_FREE_STR(1, str_tmp);
+}
